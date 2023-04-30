@@ -1,5 +1,6 @@
 import requests
 import json
+import random
 
 print(
     """*********** Welcome to ALA **********
@@ -9,14 +10,17 @@ print(
     (4) x
 """
 )
-
-proxysite_num = input("프록시사이트번호를 입력해라 : ")
-proxysite = int(proxysite_num)
-if 0 < proxysite < 5:
-    print(proxysite)
-else:
-    print("번호똑바로입력하시오 휴먼")
-    raise
+while 1:
+    try:
+        proxysite = int(input("\nQ. 프록시사이트번호를 입력하시오 : "))
+    except:
+        print("\n번호똑바로입력하시오 휴먼")
+        continue
+    if 0 < proxysite < 5:
+        print(proxysite)
+        break
+    else:
+        print("\n번호똑바로입력하시오 휴먼")
 
 token = "zfvLnWqQB2H9o2Wk2stZ8NmTUXCJ3C1uMPctfpq9"
 
@@ -36,13 +40,25 @@ for city in cities:
     i = i + 1
     print(f"""({i}) {city.upper()}""")
 
-cityIndex = int(input("주를 고르시오 : "))
-choosen_city = cities[cityIndex]
-if 0 <= cityIndex < 50:
-    print(f"""{choosen_city}주로 접속을 시도합니다""")
+while 1:
+    try:
+        cityIndex = int(input("Q. 주를 고르시오 : "))
+    except:
+        print(f"""\n*******************  번호똑바로입력하시오  *******************""")
+        continue
+    if 0 <= cityIndex < 50:
+        choosen_city = cities[cityIndex]
+        print(
+            f"""\n*******************  {choosen_city}주로 접속을 시도합니다  *******************"""
+        )
+        break
+    else:
+        print(f"""\n*******************  번호똑바로입력하시오  *******************""")
 
-proxyip = f"rotating.proxyempire.io:9000:zUzdZbdi3gtuDvOZ:wifi;us;;{choosen_city};"
+random_num = random.randint(9000, 9999)
+proxyip = (
+    f"rotating.proxyempire.io:{random_num}:zUzdZbdi3gtuDvOZ:wifi;us;;{choosen_city}"
+)
 
 list_proxyip = proxyip.split(":")
-print(list_proxyip[0])
-# print(proxyip)
+print(f"\nIP 주소 = {proxyip}")
